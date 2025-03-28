@@ -5,21 +5,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Главная страница</title>
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>Главная страница</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 </head>
 <body>
-	<jsp:include page="/static/header.jsp"></jsp:include>
-	<h1>
-		Главная страница
-	</h1>
-	<my:layout2Columns leftColumnWidth="68%" rightColumnWidth="28%">
+<jsp:include page="/static/header.jsp"></jsp:include>
+<h1>
+    Главная страница
+</h1>
+<my:layout2Columns leftColumnWidth="68%" rightColumnWidth="28%">
 		<jsp:attribute name="leftColumnBody">
 <ad:getAds range="all" var="adListing" sort="${sessionScope.sort}"
-				dir="${sessionScope.dir}" />
+           dir="${sessionScope.dir}" />
 <my:adListing adListing="${adListing}" editMode="false" />
 </jsp:attribute>
-		<jsp:attribute name="rightColumnBody">
+    <jsp:attribute name="rightColumnBody">
 <my:errorMessage/>
 <my:loginForm>
 <jsp:attribute name="processor">
@@ -32,7 +32,7 @@
 </jsp:attribute>
 </my:registerButton>
 </jsp:attribute>
-	</my:layout2Columns>
-	<%@ include file="/static/footer.jsp"%>
+</my:layout2Columns>
+<%@ include file="/static/footer.jsp"%>
 </body>
 </html>

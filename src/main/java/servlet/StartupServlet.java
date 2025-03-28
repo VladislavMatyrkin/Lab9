@@ -24,5 +24,4 @@ public class StartupServlet extends HttpServlet {
             ad.setAuthor(userList.findUser(ad.getAuthorId()));
             ad.setLastModified(ad.getLastModified());
         }
-    }
 }

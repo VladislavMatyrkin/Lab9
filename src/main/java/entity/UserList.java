@@ -5,7 +5,7 @@ public class UserList extends ListOfIdentifiables<User> {
     private static final long serialVersionUID = 7115985836992230188L;
 
     public synchronized User findUser(String login){
-     for(User user : items){
+        for(User user : items){
             if(user.getLogin().equals(login))
                 return user;
         }

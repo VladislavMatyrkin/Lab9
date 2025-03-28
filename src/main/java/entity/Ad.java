@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class Ad implements Serializable, Identifiable {
 
     private static final long serialVersionUID = -1777984074044025486L;
@@ -17,7 +16,10 @@ public class Ad implements Serializable, Identifiable {
     private Long lastModified;
     transient private Date lastModifiedDate;
 
-    public Ad(){
+    private Long fromDate;  // New field for start date
+    private Long toDate;    // New field for end date
+
+    public Ad() {
         lastModified = Calendar.getInstance().getTimeInMillis();
     }
 
@@ -65,13 +67,29 @@ public class Ad implements Serializable, Identifiable {
         return lastModified;
     }
 
-    public void setLastModified(Long lastModified){
+    public void setLastModified(Long lastModified) {
         this.lastModified = lastModified;
-        lastModifiedDate = new Date(lastModified);
+        this.lastModifiedDate = new Date(lastModified);
     }
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public Long getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Long fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Long getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Long toDate) {
+        this.toDate = toDate;
     }
 
     public int hashCode() {
@@ -79,21 +97,32 @@ public class Ad implements Serializable, Identifiable {
     }
 
     public boolean equals(Object obj) {
-        if(this == obj)
+        if (this == obj)
             return true;
 
-        if(obj == null)
+        if (obj == null)
             return false;
 
-        if(getClass() != obj.getClass())
+        if (getClass() != obj.getClass())
             return false;
 
         Ad other = (Ad) obj;
 
-        if(id != other.id)
+        if (id != other.id)
             return false;
 
         return true;
     }
 
+    public boolean isVisible() {
+        long now = Calendar.getInstance().getTimeInMillis();
+        return (fromDate == null || now >= fromDate) && (toDate == null || now <= toDate);
+    }
+
+    public boolean validateDates() {
+        if (fromDate != null && toDate != null) {
+            return fromDate < toDate; // fromDate must be before toDate
+        }
+        return true; // If one of the dates is null, validation passes
+    }
 }
